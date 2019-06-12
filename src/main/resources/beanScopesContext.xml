@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context.xsd  
+        http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- ***** Singleton Scope *************************************** -->
+	<!-- Scope - Singleton, creates only single instance to the bean. Every 
+		new request to bean refer to this shared bean resource. -->
+	<bean id="skoda" class="com.app.rc.beanScopes.Skoda"
+		scope="singleton" />
+
+	<!-- ***** Method in Spring Beans *************************************** -->
+	<!-- Scope - Prototype, creates new instances to the every bean request. 
+		Every new request to bean refer to new bean resource. -->
+	<bean id="fiat" class="com.app.rc.beanScopes.Fiat"
+		init-method="fiatInitMethod" destroy-method="fiatDestroyMethod"
+		scope="singleton">
+		<property name="name" value="Fiat Motors Inc."></property>
+		<property name="country" value="Italy"></property>
+	</bean>
+</beans>

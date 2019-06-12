@@ -1,0 +1,46 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context.xsd  
+        http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Using Properties Files -->
+	<context:property-placeholder
+		location="classpath:app.properties" />
+
+	<bean id="sedanCars"
+		class="com.app.rc.inversionOfControl.SedanCars" />
+
+	<!-- Constructor Injection - Dependency -->
+	<bean id="sedanModel"
+		class="com.app.rc.dependencyInjection.SedanCarModel" />
+
+	<!-- Main Bean - which calls the dependency -->
+	<bean id="sedanCar"
+		class="com.app.rc.dependencyInjection.SedanCar">
+		<constructor-arg ref="sedanModel" />
+		<!--<property name="modelName" value="Sedan:FromXml" /> -->
+		<!-- Using Properties File -->
+		<property name="modelName" value="${di.session}" />
+	</bean>
+	<!-- Constructor Injection -->
+
+	<!-- Setter Injection -->
+	<bean id="specialPurposeSedan"
+		class="com.app.rc.dependencyInjection.SpecialPurposeSedan">
+		<property name="model" ref="sedanModel" />
+		<!-- name should be exact name given to the setter method except the 'set' 
+			keyword. Spring will append set to the passed name and searches for a setter 
+			in the class. -->
+	</bean>
+	<!-- Setter Injection -->
+
+
+</beans>
